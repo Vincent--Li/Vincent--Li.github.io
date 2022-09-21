@@ -2,9 +2,9 @@
 
 
 # Book Overview
->***C1: Introduction***
+>***C1: A Tour of Computer Systems***
 
-[Introduction]({{<ref "introduction.md">}})
+[A Tour of Computer Systems]({{<ref "introduction.md">}})
 
 >***C2: Representing and Manipulating Information***
 
@@ -24,10 +24,14 @@
 
 >***C10: System-Level I/O***
 
+>***C11: Network Programming***
+
+>***C12: Concurrent Programming***
+
 
 
 # Links
-[CS:APP main page]({{}})
+[CS:APP main page](http://csapp.cs.cmu.edu)
 
 [CS:APP Web aside](http://csapp.cs.cmu.edu/3e/waside.html)
 
