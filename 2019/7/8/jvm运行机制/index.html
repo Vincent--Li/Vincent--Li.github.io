@@ -1,0 +1,251 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>JVM运行机制 - Vincent is right here</title><meta name=Description content="怕什么真理无穷,进一寸有一寸的欢喜"><meta property="og:title" content="JVM运行机制"><meta property="og:description" content="JVM运行机制 PC寄存器 每个线程拥有一个PC寄存器 在线程创建时创建 总是指向下一条指令的地址 执行本地方法时, PC的值为undefined 方法区"><meta property="og:type" content="article"><meta property="og:url" content="https://vincent--li.github.io/2019/7/8/jvm%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/"><meta property="og:image" content="https://vincent--li.github.io/images/favicon.ico"><meta property="article:section" content="posts"><meta property="article:published_time" content="2019-07-08T09:10:50+00:00"><meta property="article:modified_time" content="2022-09-22T01:23:10+08:00"><meta property="og:site_name" content="怕什么真理无穷,进一寸有一寸的欢喜"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://vincent--li.github.io/images/favicon.ico"><meta name=twitter:title content="JVM运行机制"><meta name=twitter:description content="JVM运行机制 PC寄存器 每个线程拥有一个PC寄存器 在线程创建时创建 总是指向下一条指令的地址 执行本地方法时, PC的值为undefined 方法区"><meta name=application-name content="My cool site"><meta name=apple-mobile-web-app-title content="My cool site"><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=manifest href=/site.webmanifest><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=/images/favicon.ico><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://vincent--li.github.io/2019/7/8/jvm%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/><link rel=prev href=https://vincent--li.github.io/2019/6/8/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E8%A7%86%E9%A2%91%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%9715-%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B/><link rel=next href=https://vincent--li.github.io/2019/7/8/jvm%E5%B8%B8%E7%94%A8%E8%BF%90%E8%A1%8C%E5%8F%82%E6%95%B0/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=/lib/fontawesome-free/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload href=/lib/animate/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"JVM运行机制","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/vincent--li.github.io\/2019\/7\/8\/jvm%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6\/"},"genre":"posts","keywords":"Java, JVM","wordcount":1861,"url":"https:\/\/vincent--li.github.io\/2019\/7\/8\/jvm%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6\/","datePublished":"2019-07-08T09:10:50+00:00","dateModified":"2022-09-22T01:23:10+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"Vincent"},"description":""}</script></head><body data-header-desktop=auto data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="Vincent is right here">Vincent is right here</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Posts </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/about/>Abount </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder="Search titles or contents..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=Search><i class="fas fa-search fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=Clear><i class="fas fa-times-circle fa-fw" aria-hidden=true></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme"><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="Vincent is right here">Vincent is right here</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="Search titles or contents..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=Search><i class="fas fa-search fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=Clear><i class="fas fa-times-circle fa-fw" aria-hidden=true></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>Cancel</a></div><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/about/ title>Abount</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JVM运行机制</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/about title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>Vincent</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2019-07-08>2019-07-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;1861 words&nbsp;
+<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;4 minutes&nbsp;</div></div><div class="details toc" id=toc-static data-kept=true><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><ul><li><a href=#jvm运行机制>JVM运行机制</a><ul><li><a href=#pc寄存器>PC寄存器</a></li><li><a href=#方法区>方法区</a></li><li><a href=#java堆>java堆</a></li><li><a href=#java栈>java栈</a></li><li><a href=#java栈之局部变量表包含参数和局部变量>java栈之局部变量表(包含参数和局部变量)</a></li><li><a href=#java栈之函数调用组成帧栈包括操作数栈和返回地址>java栈之函数调用组成帧栈(包括操作数栈和返回地址)</a></li><li><a href=#java栈之操作数栈>java栈之操作数栈</a></li><li><a href=#java栈之栈上分配>java栈之栈上分配</a></li><li><a href=#堆-栈-方法区交互>堆, 栈, 方法区交互</a></li><li><a href=#内存模型>内存模型</a></li><li><a href=#volatile>volatile</a></li><li><a href=#可见性>可见性</a></li><li><a href=#保证可见性的方法>保证可见性的方法</a></li><li><a href=#有序性>有序性</a></li><li><a href=#指令重排的基本原则>指令重排的基本原则</a></li><li><a href=#解释执行>解释执行</a></li><li><a href=#编译运行jit>编译运行(JIT)</a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h3 id=jvm运行机制>JVM运行机制</h3><h4 id=pc寄存器>PC寄存器</h4><ul><li>每个线程拥有一个PC寄存器</li><li>在线程创建时创建</li><li>总是指向下一条指令的地址</li><li>执行本地方法时, PC的值为undefined</li></ul><h4 id=方法区>方法区</h4><ul><li>保存装载的类信息<ul><li>类型的常量池</li><li>字段, 方法信息</li><li>方法字节码</li></ul></li><li>通常和永久区关联在一起</li></ul><h4 id=java堆>java堆</h4><ul><li>和程序开发密切相关</li><li>应用系统对象都保存在java堆中</li><li>所有线程共享java堆</li><li>对分代GC来说, 堆也是分代</li><li>GC的主要工作区间: eden|s0|s1|tenured</li></ul><h4 id=java栈>java栈</h4><ul><li>线程私有</li><li>栈由一系列帧组成(因此java栈也叫做栈帧)</li><li>帧保存一个方法的局部变量,操作数栈,常量池指针</li><li>每一次方法调用创建一个帧,并压栈</li></ul><h4 id=java栈之局部变量表包含参数和局部变量>java栈之局部变量表(包含参数和局部变量)</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>StackDemo</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=cm>/* 假设局部变量表里是一个槽位, 每个槽位最大容纳32位的数据*/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=cm>/* 静态方法的局部变量表为:
+</span></span></span><span class=line><span class=cl><span class=cm>       0 int int i
+</span></span></span><span class=line><span class=cl><span class=cm>       1 long long l
+</span></span></span><span class=line><span class=cl><span class=cm>       2 float float f
+</span></span></span><span class=line><span class=cl><span class=cm>       3 reference Object o
+</span></span></span><span class=line><span class=cl><span class=cm>       4 int byte b
+</span></span></span><span class=line><span class=cl><span class=cm>  */</span>
+</span></span><span class=line><span class=cl>  <span class=kd>public</span> <span class=kd>static</span> <span class=kt>int</span> <span class=n>run</span> <span class=nf>Static</span><span class=o>(</span><span class=kt>int</span> <span class=n>i</span><span class=o>,</span> <span class=kt>long</span> <span class=n>l</span><span class=o>,</span> <span class=kt>float</span> <span class=n>f</span><span class=o>,</span> <span class=n>Object</span> <span class=n>o</span><span class=o>,</span> <span class=kt>byte</span> <span class=n>b</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>0</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=cm>/* 实例方法的局部变量表为:
+</span></span></span><span class=line><span class=cl><span class=cm>       0 reference this 当前对象的引用
+</span></span></span><span class=line><span class=cl><span class=cm>       1 int char c
+</span></span></span><span class=line><span class=cl><span class=cm>       2 int short s
+</span></span></span><span class=line><span class=cl><span class=cm>       3 int boolean bµ
+</span></span></span><span class=line><span class=cl><span class=cm>    */</span>
+</span></span><span class=line><span class=cl>  <span class=kd>public</span> <span class=kt>int</span> <span class=nf>runInstance</span><span class=o>(</span><span class=kt>char</span> <span class=n>c</span><span class=o>,</span> <span class=kt>short</span> <span class=n>s</span><span class=o>,</span> <span class=kt>boolean</span> <span class=n>b</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>0</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=java栈之函数调用组成帧栈包括操作数栈和返回地址>java栈之函数调用组成帧栈(包括操作数栈和返回地址)</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>函数调用过程, 会压栈
+</span></span></span><span class=line><span class=cl><span class=cm>*/</span>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>static</span> <span class=kt>int</span> <span class=nf>runStatic</span><span class=o>(</span><span class=kt>int</span> <span class=n>i</span><span class=o>,</span> <span class=kt>long</span> <span class=n>l</span><span class=o>,</span> <span class=kt>float</span> <span class=n>f</span><span class=o>,</span> <span class=n>Object</span> <span class=n>o</span><span class=o>,</span> <span class=kt>byte</span> <span class=n>b</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=n>runStatic</span><span class=o>(</span><span class=n>i</span><span class=o>,</span> <span class=n>l</span><span class=o>,</span> <span class=n>f</span><span class=o>,</span> <span class=n>o</span><span class=o>,</span> <span class=n>b</span><span class=o>);</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=java栈之操作数栈>java栈之操作数栈</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>  java没有寄存器, 所有参数传递使用操作数栈
+</span></span></span><span class=line><span class=cl><span class=cm>  以下方法的操作数栈情况:
+</span></span></span><span class=line><span class=cl><span class=cm>  0 iconst_0 0压栈
+</span></span></span><span class=line><span class=cl><span class=cm>  1 istore_2 弹出int,存放于局部变量2
+</span></span></span><span class=line><span class=cl><span class=cm>  2 iload_0 把局部变量0压栈
+</span></span></span><span class=line><span class=cl><span class=cm>  3 iload_1 把局部变量1压栈
+</span></span></span><span class=line><span class=cl><span class=cm>  4 iadd 弹出2个变量,求和,结果压栈
+</span></span></span><span class=line><span class=cl><span class=cm>  5 istore_2 弹出结果,放于局部变量2
+</span></span></span><span class=line><span class=cl><span class=cm>  6 iload_2 局部变量2压栈
+</span></span></span><span class=line><span class=cl><span class=cm>  7 ireturn 返回
+</span></span></span><span class=line><span class=cl><span class=cm>*/</span>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>static</span> <span class=kt>int</span> <span class=nf>add</span><span class=o>(</span><span class=kt>int</span> <span class=n>a</span><span class=o>,</span> <span class=kt>int</span> <span class=n>b</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>c</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>c</span> <span class=o>=</span> <span class=n>a</span> <span class=o>+</span> <span class=n>b</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>c</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=java栈之栈上分配>java栈之栈上分配</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>class</span> <span class=nc>BcmBasicString</span><span class=o>{...}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>堆上分配, 每次要手动清理内存
+</span></span></span><span class=line><span class=cl><span class=cm>*/</span>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kt>void</span> <span class=nf>method</span><span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=n>BcmBasicString</span><span class=o>*</span> <span class=n>str</span> <span class=o>=</span> <span class=k>new</span> <span class=n>BcmBasicString</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>  <span class=o>...</span>
+</span></span><span class=line><span class=cl>  <span class=n>delete</span> <span class=n>str</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>栈上分配, 不会出现内存泄漏
+</span></span></span><span class=line><span class=cl><span class=cm>*/</span>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kt>void</span> <span class=nf>method</span><span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=n>BcmBasicString</span> <span class=n>str</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>  <span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>栈上分配特点</p><ul><li>小对象(一般几十个bytes), 在没有逃逸的情况下, 可以直接分配在栈上</li><li>直接分配在栈上, 可以自动回收, 减轻GC压力</li><li>大对象或者逃逸对象(即会被共享的对象)无法栈上分配</li></ul><h4 id=堆-栈-方法区交互>堆, 栈, 方法区交互</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>AppMain</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>//运行时, jvm把appmain的信息都放入方法区
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>    <span class=c1>//test1是引用, 放到栈区, Sample是自定义对象, 放到堆里面
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>Sample</span> <span class=n>test1</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Sample</span><span class=o>(</span><span class=s>&#34;test1&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>Sample</span> <span class=n>test2</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Sample</span><span class=o>(</span><span class=s>&#34;test2&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>test1</span><span class=o>.</span><span class=na>printName</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>test2</span><span class=o>.</span><span class=na>printName</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Sample</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>//运行时, jvm把sample的信息都放入方法区
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=c1>// new Sample实例后, name引用放到栈区里, name对象放到堆里
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>private</span> <span class=n>String</span> <span class=n>name</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>public</span> <span class=nf>Sample</span><span class=o>(</span><span class=n>String</span> <span class=n>name</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=o>.</span><span class=na>name</span> <span class=o>=</span> <span class=n>name</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// print 方法本身放入方法区里
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>public</span> <span class=kt>void</span> <span class=nf>printName</span><span class=o>(){</span>
+</span></span><span class=line><span class=cl>    <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>name</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=内存模型>内存模型</h4><ul><li>每一个线程有一个工作从内存和主存独立</li><li>工作内存存放主存中变量值的拷贝</li><li>当数据从"主内存"复制到"线程工作内存"时, 必须出现两个动作:</li></ul><ol><li>主内存执行的(read)操作</li><li>工作内存执行相应的load操作</li></ol><ul><li>当数据从"线程工作内存"拷贝到"主内存"时, 也出现两个动作:</li></ul><ol><li>工作内存执行store操作</li><li>主内存执行相应的写write操作</li></ol><ul><li>每个操作都是原子的, 即执行期间不会被中断</li><li>对于普通变量, 一个线程中更新的值,不能马上反应在其他变量中. 如果需要在其他线程中立即课件, 需要使用volatile关键字</li></ul><h4 id=volatile>volatile</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>  volatile 不能替代锁, 一般认为volatile比锁性能好(不绝对)
+</span></span></span><span class=line><span class=cl><span class=cm>  选择使用volatile的条件是: 语义是否满足应用, 它是线程不安全的
+</span></span></span><span class=line><span class=cl><span class=cm>*/</span>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>VolatileStopThread</span> <span class=kd>extends</span> <span class=n>Thread</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>private</span> <span class=kd>volatile</span> <span class=kt>boolean</span> <span class=n>stop</span> <span class=o>=</span> <span class=kc>false</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>public</span> <span class=kt>void</span> <span class=nf>stopMe</span><span class=o>(){</span>
+</span></span><span class=line><span class=cl>    <span class=n>stop</span> <span class=o>=</span> <span class=kc>true</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>(){</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span><span class=o>(!</span><span class=n>stop</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>      <span class=n>i</span><span class=o>++;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;Stop thread&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=kd>throws</span> <span class=n>InterruptedException</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>VolatileStopThread</span> <span class=n>t</span> <span class=o>=</span> <span class=k>new</span> <span class=n>VolatileStopThread</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>t</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>Thread</span><span class=o>.</span><span class=na>sleep</span><span class=o>(</span><span class=n>1000</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>t</span><span class=o>.</span><span class=na>stopMe</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>Thread</span><span class=o>.</span><span class=na>sleep</span><span class=o>(</span><span class=n>1000</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=可见性>可见性</h4><ul><li>一个线程修改了变量, 其他线程可以立即知道</li></ul><h4 id=保证可见性的方法>保证可见性的方法</h4><ul><li>volatile</li><li>synchronized(unlock之前, 写变量值回主存)</li><li>final(一旦初始化完成,其它线程就可见)</li></ul><h4 id=有序性>有序性</h4><ul><li>在本线程内,操作都是有序的</li><li>在线程外观察,操作都是无序的(指令重排 或 主内存同步延时)</li></ul><h4 id=指令重排的基本原则>指令重排的基本原则</h4><ul><li>程序顺序原则: 一个线程内保证语义的串行性</li><li>volatile规则: volatile变量的写, 先发生于读</li><li>锁规则: 解锁(unlock)必然发生在随后的加锁(lock)前</li><li>传递性: A先于B, B先于C 那么A必然先于C</li><li>线程的start方法先于它的每一个动作</li><li>线程的所有操作先于线程的终结(Thread.join())</li><li>线程的中断(interrupte())先于被中断线程的代码</li><li>对象的构造函数执行先于finalize()方法</li></ul><h4 id=解释执行>解释执行</h4><ul><li>解释执行以解释方式运行字节码</li><li>解释执行的意思是: 读一句执行一句</li></ul><h4 id=编译运行jit>编译运行(JIT)</h4><ul><li>将字节码编译成机器码</li><li>直接执行机器码</li><li>运行时编译</li><li>编译后性能有数量级的提升</li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2022-09-22&nbsp;<a class=git-hash href=Vincent--Li/Vincent--Li.github.io/commit/4ec7dd30e9fdf8d8f3faaa111d039fbd19c68dba target=_blank title="commit by Vincent--Li(q315744068@gmail.com) 4ec7dd30e9fdf8d8f3faaa111d039fbd19c68dba: update: new posts">
+<i class="fas fa-hashtag fa-fw" aria-hidden=true></i>4ec7dd3</a></span></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=/2019/7/8/jvm%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/index.md target=_blank>Read Markdown</a></span></div><div class=post-info-share><span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://vincent--li.github.io/2019/7/8/jvm%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/ data-title=JVM运行机制 data-hashtags=Java,JVM><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Facebook" data-sharer=facebook data-url=https://vincent--li.github.io/2019/7/8/jvm%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/ data-hashtag=Java><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Hacker News" data-sharer=hackernews data-url=https://vincent--li.github.io/2019/7/8/jvm%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/ data-title=JVM运行机制><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Line" data-sharer=line data-url=https://vincent--li.github.io/2019/7/8/jvm%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/ data-title=JVM运行机制><i data-svg-src=/lib/simple-icons/icons/line.min.svg aria-hidden=true></i></a><a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://vincent--li.github.io/2019/7/8/jvm%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/ data-title=JVM运行机制><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/java/>Java</a>,&nbsp;<a href=/tags/jvm/>JVM</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/2019/6/8/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E8%A7%86%E9%A2%91%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%9715-%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B/ class=prev rel=prev title=机器学习-视频学习系列15-隐马尔可夫模型><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>机器学习-视频学习系列15-隐马尔可夫模型</a>
+<a href=/2019/7/8/jvm%E5%B8%B8%E7%94%A8%E8%BF%90%E8%A1%8C%E5%8F%82%E6%95%B0/ class=next rel=next title=JVM常用运行参数>JVM常用运行参数<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div><div id=comments></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2019 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/about target=_blank>Vincent</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/contrib/auto-render.min.js></script><script type=text/javascript src=/lib/katex/contrib/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/contrib/mhchem.min.js></script><script type=text/javascript src=/lib/cookieconsent/cookieconsent.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:50},comment:{},cookieconsent:{content:{dismiss:"Got it!",link:"Learn more",message:"This website uses Cookies to improve your experience."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!0,left:"\\begin{equation}",right:"\\end{equation}"},{display:!0,left:"\\begin{equation*}",right:"\\end{equation*}"},{display:!0,left:"\\begin{align}",right:"\\end{align}"},{display:!0,left:"\\begin{align*}",right:"\\end{align*}"},{display:!0,left:"\\begin{alignat}",right:"\\end{alignat}"},{display:!0,left:"\\begin{alignat*}",right:"\\end{alignat*}"},{display:!0,left:"\\begin{gather}",right:"\\end{gather}"},{display:!0,left:"\\begin{CD}",right:"\\end{CD}"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/index.json",maxResultLength:10,noResultsFound:"No results found",snippetLength:30,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>

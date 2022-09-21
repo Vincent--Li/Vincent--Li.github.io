@@ -1,0 +1,363 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Markdown复习 - Vincent is right here</title><meta name=Description content="怕什么真理无穷,进一寸有一寸的欢喜"><meta property="og:title" content="Markdown复习"><meta property="og:description" content="基础语法 标题 Markdown支持6中级别的标题, 对应HTML标签h1-h6 1 2 3 4 5 6 # h1 ## h2 ### h3 #### h4 ##### h5 ###### h6 此外, markdown还支持简"><meta property="og:type" content="article"><meta property="og:url" content="https://vincent--li.github.io/2022/9/17/markdown%E5%A4%8D%E4%B9%A0/"><meta property="og:image" content="https://vincent--li.github.io/images/favicon.ico"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-09-17T21:49:25+08:00"><meta property="article:modified_time" content="2022-09-22T01:23:10+08:00"><meta property="og:site_name" content="怕什么真理无穷,进一寸有一寸的欢喜"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://vincent--li.github.io/images/favicon.ico"><meta name=twitter:title content="Markdown复习"><meta name=twitter:description content="基础语法 标题 Markdown支持6中级别的标题, 对应HTML标签h1-h6 1 2 3 4 5 6 # h1 ## h2 ### h3 #### h4 ##### h5 ###### h6 此外, markdown还支持简"><meta name=application-name content="My cool site"><meta name=apple-mobile-web-app-title content="My cool site"><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=manifest href=/site.webmanifest><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=/images/favicon.ico><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://vincent--li.github.io/2022/9/17/markdown%E5%A4%8D%E4%B9%A0/><link rel=prev href=https://vincent--li.github.io/2019/8/1/java-class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/><link rel=next href=https://vincent--li.github.io/2022/9/21/csapp-preface/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=/lib/fontawesome-free/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload href=/lib/animate/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Markdown复习","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/vincent--li.github.io\/2022\/9\/17\/markdown%E5%A4%8D%E4%B9%A0\/"},"genre":"posts","wordcount":2353,"url":"https:\/\/vincent--li.github.io\/2022\/9\/17\/markdown%E5%A4%8D%E4%B9%A0\/","datePublished":"2022-09-17T21:49:25+08:00","dateModified":"2022-09-22T01:23:10+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"Vincent"},"description":""}</script></head><body data-header-desktop=auto data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="Vincent is right here">Vincent is right here</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Posts </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/about/>Abount </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder="Search titles or contents..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=Search><i class="fas fa-search fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=Clear><i class="fas fa-times-circle fa-fw" aria-hidden=true></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme"><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="Vincent is right here">Vincent is right here</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="Search titles or contents..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=Search><i class="fas fa-search fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=Clear><i class="fas fa-times-circle fa-fw" aria-hidden=true></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>Cancel</a></div><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/about/ title>Abount</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Markdown复习</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/about title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>Vincent</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2022-09-17>2022-09-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;2353 words&nbsp;
+<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;5 minutes&nbsp;</div></div><div class="details toc" id=toc-static data-kept=true><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#基础语法>基础语法</a><ul><li><a href=#标题>标题</a></li><li><a href=#段落及区块引用>段落及区块引用</a></li><li><a href=#插入链接或图片>插入链接或图片</a></li><li><a href=#列表>列表</a></li><li><a href=#使用列表的注意事项>使用列表的注意事项</a></li><li><a href=#分隔线>分隔线</a></li><li><a href=#强调>强调</a></li></ul></li><li><a href=#高级用法>高级用法</a><ul><li><a href=#mathjax>mathjax</a><ul><li><a href=#公式标记>公式标记</a></li><li><a href=#特殊符号>特殊符号</a></li><li><a href=#上标下标>上标/下标</a></li><li><a href=#括号>括号</a></li><li><a href=#求和积分多重积分>求和/积分/多重积分</a></li><li><a href=#分式根式>分式/根式</a></li></ul></li><li><a href=#插入代码块>插入代码块</a></li><li><a href=#插入表格>插入表格</a></li><li><a href=#流程图>流程图</a></li><li><a href=#甘特图>甘特图</a></li><li><a href=#uml序列图>UML序列图</a></li></ul></li><li><a href=#其它>其它</a><ul><li><a href=#特殊符号处理>特殊符号处理</a></li><li><a href=#给文字上色>给文字上色</a></li></ul></li></ul></nav></div></div><div class=content id=content><h2 id=基础语法>基础语法</h2><h3 id=标题>标题</h3><p>Markdown支持6中级别的标题, 对应HTML标签h1-h6</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gh># h1
+</span></span></span><span class=line><span class=cl><span class=gh></span><span class=gu>## h2
+</span></span></span><span class=line><span class=cl><span class=gu>### h3
+</span></span></span><span class=line><span class=cl><span class=gu>#### h4
+</span></span></span><span class=line><span class=cl><span class=gu>##### h5
+</span></span></span><span class=line><span class=cl><span class=gu>###### h6
+</span></span></span></code></pre></td></tr></table></div></div><p>此外, markdown还支持简单的两级标题设置</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>这是一级标题
+</span></span><span class=line><span class=cl>===
+</span></span><span class=line><span class=cl>这是二级标题
+</span></span><span class=line><span class=cl>---
+</span></span></code></pre></td></tr></table></div></div><h3 id=段落及区块引用>段落及区块引用</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=k>&gt; </span><span class=ge>这段文字将被高亮显示
+</span></span></span></code></pre></td></tr></table></div></div><blockquote><p>这段文字将被高亮显示</p></blockquote><h3 id=插入链接或图片>插入链接或图片</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>[<span class=nt>点击跳转至百度</span>](<span class=na>http://www.baidu.com</span>)
+</span></span><span class=line><span class=cl>![<span class=nt>图片</span>](<span class=na>https://upload.jianshu.io/users/upload_avatars/2130822/3507378e03a8.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120</span>)
+</span></span><span class=line><span class=cl>自动生成连接 <span class=p>&lt;</span><span class=nt>https:</span><span class=err>//</span><span class=na>www</span><span class=err>.</span><span class=na>baidu</span><span class=err>.</span><span class=na>com</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p><a href=http://www.baidu.com target=_blank rel="noopener noreffer">点击跳转至百度</a>
+<img class=lazyload src=/svg/loading.min.svg data-src=https://upload.jianshu.io/users/upload_avatars/2130822/3507378e03a8.jpeg?imageMogr2/auto-orient/strip%7cimageView2/1/w/120/h/120 data-srcset="https://upload.jianshu.io/users/upload_avatars/2130822/3507378e03a8.jpeg?imageMogr2/auto-orient/strip%7cimageView2/1/w/120/h/120, https://upload.jianshu.io/users/upload_avatars/2130822/3507378e03a8.jpeg?imageMogr2/auto-orient/strip%7cimageView2/1/w/120/h/120 1.5x, https://upload.jianshu.io/users/upload_avatars/2130822/3507378e03a8.jpeg?imageMogr2/auto-orient/strip%7cimageView2/1/w/120/h/120 2x" data-sizes=auto alt=https://upload.jianshu.io/users/upload_avatars/2130822/3507378e03a8.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120 title=图片>
+自动生成连接 <a href=https://www.baidu.com target=_blank rel="noopener noreffer">https://www.baidu.com</a></p><p>注: 引用图片和链接的唯一区别就是最前面的叹号</p><h3 id=列表>列表</h3><p>Markdown支持有序列表和无序列表两种形式:</p><ul><li>无序列表使用*或+或-标识</li><li>有序列表使用数字加.标识,例如1.</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=k>*</span> 黄瓜
+</span></span><span class=line><span class=cl><span class=k>*</span> 玉米
+</span></span><span class=line><span class=cl><span class=k>*</span> 茄子
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>+ 黄瓜
+</span></span><span class=line><span class=cl>+ 玉米
+</span></span><span class=line><span class=cl>+ 茄子
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> 黄瓜
+</span></span><span class=line><span class=cl><span class=k>-</span> 玉米
+</span></span><span class=line><span class=cl><span class=k>-</span> 茄子
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> 黄瓜
+</span></span><span class=line><span class=cl><span class=k>2.</span> 玉米
+</span></span><span class=line><span class=cl><span class=k>3.</span> 茄子
+</span></span></code></pre></td></tr></table></div></div><p>以上标记效果如下</p><ul><li>黄瓜</li><li>玉米</li><li>茄子</li></ul><ol><li>黄瓜</li><li>玉米</li><li>茄子</li></ol><p>注: 对于有序列表, markdown只关注第一个item的数字编号,然后按次序向后递增. 不管后面的序号是否连续,始终以第一个item的数字编号为锚点</p><h3 id=使用列表的注意事项>使用列表的注意事项</h3><ul><li>如果一个item里面包含了多个段落, *与段落首字母之间需要保留4个空格</li><li>如果列表钟有区块引用, 区块引用标记符也要缩进4个空格</li></ul><h3 id=分隔线>分隔线</h3><p>有时候为了排版漂亮, 需要加入分隔线. markdown使用下面两种形式之一加入分隔线</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>***
+</span></span><span class=line><span class=cl>---
+</span></span></code></pre></td></tr></table></div></div><p>效果如下, 分隔线语法比较松. 符号之间有空格也可以识别</p><hr><h3 id=强调>强调</h3><p>有时候, 需要对文字做强调. 使用如下方式</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>*这是斜体*
+</span></span><span class=line><span class=cl><span class=ge>_这是斜体_</span>
+</span></span><span class=line><span class=cl><span class=gs>**这是粗体**</span>
+</span></span><span class=line><span class=cl><span class=gs>__这是粗体__</span>
+</span></span><span class=line><span class=cl><span class=gd>~~删除~~</span>
+</span></span></code></pre></td></tr></table></div></div><p><del>删除</del>
+<em>这是斜体</em>
+<em>这是斜体</em>
+<strong>这是粗体</strong>
+<strong>这是粗体</strong></p><h2 id=高级用法>高级用法</h2><h3 id=mathjax>mathjax</h3><p>参考链接 <a href=https://jingyan.baidu.com/article/4b52d702df537efc5c774bc9.html target=_blank rel="noopener noreffer">https://jingyan.baidu.com/article/4b52d702df537efc5c774bc9.html</a></p><p>如果使用mathjax需要在FrontMatter中写入<code>mathjax: true</code></p><h4 id=公式标记>公式标记</h4><p>有两种方式</p><ul><li>一种是行内标记用$符号表示</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl><span class=s>$</span><span class=o>(</span><span class=nb>W_</span><span class=m>1</span><span class=nb>−W_</span><span class=m>2</span><span class=o>)</span><span class=nb>x</span><span class=o>+</span><span class=nb>b_</span><span class=m>1</span><span class=nb>−b_</span><span class=m>2</span><span class=o>=</span><span class=m>0</span><span class=s>$</span>
+</span></span></code></pre></td></tr></table></div></div><p>这是一个行内公式 $(W_1−W_2)x+b_1−b_2=0$</p><ul><li>一种是整行公式用两个$$</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl><span class=sb>$$</span><span class=nb>
+</span></span></span><span class=line><span class=cl><span class=nb></span><span class=o>(</span><span class=nb>W_</span><span class=m>1</span><span class=nb>−W_</span><span class=m>2</span><span class=o>)</span><span class=nb>x</span><span class=o>+</span><span class=nb>b_</span><span class=m>1</span><span class=nb>−b_</span><span class=m>2</span><span class=o>=</span><span class=m>0</span><span class=nb>
+</span></span></span><span class=line><span class=cl><span class=nb></span><span class=s>$$</span>
+</span></span></code></pre></td></tr></table></div></div><p>效果如下
+$$
+(W_1−W_2)x+b_1−b_2=0
+$$</p><h4 id=特殊符号>特殊符号</h4><table><thead><tr><th>名称</th><th>大写</th><th>写法</th><th>小写</th><th>写法</th></tr></thead><tbody><tr><td>alpha</td><td>A</td><td>A</td><td>α</td><td>\alpha</td></tr><tr><td>beta</td><td>B</td><td>B</td><td>β</td><td>\beat</td></tr><tr><td>gamma</td><td>Γ</td><td>\Gamma</td><td>γ</td><td>\gamma</td></tr><tr><td>delta</td><td>Δ</td><td>\Delta</td><td>δ</td><td>\delta</td></tr><tr><td>epsilon</td><td>E</td><td>E</td><td>ϵ</td><td>\epsilon</td></tr><tr><td>zeta</td><td>Z</td><td>Z</td><td>ζ</td><td>\zeta</td></tr><tr><td>eta</td><td>H</td><td>H</td><td>η</td><td>\eta</td></tr><tr><td>theta</td><td>Θ</td><td>\Theta</td><td>θ</td><td>\theta</td></tr><tr><td>iota</td><td>I</td><td>I</td><td>ι</td><td>\iota</td></tr><tr><td>kappa</td><td>K</td><td>K</td><td>κ</td><td>\kappa</td></tr><tr><td>lambda</td><td>Λ</td><td>\Lambda</td><td>λ</td><td>\lambda</td></tr><tr><td>mu</td><td>M</td><td>M</td><td>μ</td><td>\mu</td></tr><tr><td>nu</td><td>N</td><td>N</td><td>ν</td><td>\nu</td></tr><tr><td>xi</td><td>Ξ</td><td>\Xi</td><td>ξ</td><td>\xi</td></tr><tr><td>omicron</td><td>O</td><td>O</td><td>ο</td><td>\omicron</td></tr><tr><td>pi</td><td>Π</td><td>\Pi</td><td>π</td><td>\pi</td></tr><tr><td>rho</td><td>P</td><td>P</td><td>ρ</td><td>\rho</td></tr><tr><td>sigma</td><td>Σ</td><td>\Sigma</td><td>σ</td><td>\sigma</td></tr><tr><td>tau</td><td>T</td><td>T</td><td>τ</td><td>\tau</td></tr><tr><td>upsilon</td><td>Υ</td><td>\Upsilon</td><td>υ</td><td>\upsilon</td></tr><tr><td>phi</td><td>Φ</td><td>\Phi</td><td>ϕ</td><td>\phi</td></tr><tr><td>chi</td><td>X</td><td>X</td><td>χ</td><td>\chi</td></tr><tr><td>psi</td><td>Ψ</td><td>\Psi</td><td>ψ</td><td>\psi</td></tr><tr><td>omega</td><td>Ω</td><td>\Omega</td><td>ω</td><td>\omega</td></tr></tbody></table><h4 id=上标下标>上标/下标</h4><p>上标和下标分别使用^和_来实现</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl><span class=s>$</span><span class=nb>x_i^</span><span class=m>2</span><span class=o>=</span><span class=m>10</span><span class=s>$</span>
+</span></span><span class=line><span class=cl><span class=s>$</span><span class=nb>log_</span><span class=m>2</span><span class=nb>^x</span><span class=o>=</span><span class=m>16</span><span class=s>$</span>
+</span></span></code></pre></td></tr></table></div></div><p>效果如下
+$x_i^2=10$
+$log_2^x=16$</p><p>上下标默认只读后面一个字符, 如果有多个字符需要用{}包裹</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl><span class=s>$</span><span class=m>10</span><span class=nb>^{</span><span class=m>10</span><span class=nb>}</span><span class=s>$</span>
+</span></span><span class=line><span class=cl><span class=s>$</span><span class=m>10</span><span class=nb>^</span><span class=m>10</span><span class=s>$</span>
+</span></span></code></pre></td></tr></table></div></div><p>效果如:
+$10^{10}$
+$10^10$</p><p>如果左右两边都要有上下标</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl><span class=s>$</span><span class=nb>{^</span><span class=m>1</span><span class=nb>_</span><span class=m>2</span><span class=nb>}A{^</span><span class=m>3</span><span class=nb>_</span><span class=m>4</span><span class=nb>}</span><span class=s>$</span>
+</span></span></code></pre></td></tr></table></div></div><p>效果如${^1_2}A{^3_4}$</p><h4 id=括号>括号</h4><ul><li>小括号与方括号: 使用原始的小括号和方括号即可 $(2+3)[4+4]$</li><li>大括号: 需要使用转义符号\{和\} 如: $\{a<em>b\}$ = ${a</em>b}$</li><li>尖括号: 使用\langle和\rangle分别表示左尖括号和右尖括号$\langle x \rangle$ == $\langle x \rangle$</li><li>上取整: 使用\lceil和\rceil表示. 如: $\lceil x \rceil$ == $\lceil x \rceil$</li><li>下取整: 使用\lfloor和\rfloor表示. 如 $\lfloor x \rfloor$ = $\lfloor x \rfloor$</li><li>需要注意原始括号不会根据公式的大小缩放. 可以使用\left(&mldr;\right)来缩放. 如: $\left( \frac1{\frac12} \right)$ 和 $(\frac1{\frac12})$</li></ul><h4 id=求和积分多重积分>求和/积分/多重积分</h4><ul><li>\sum表示求和, 下标表示求和下限, 上标表示求和上限</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl><span class=s>$</span><span class=nv>\sum</span><span class=nb>_</span><span class=m>1</span><span class=nb>^n</span><span class=s>$</span>
+</span></span></code></pre></td></tr></table></div></div><p>效果如: $\sum_1^n$</p><ul><li>\int表示求积分, 下标表示求和下限, 上标表示求和上限</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl><span class=s>$</span><span class=nv>\int</span><span class=nb>_</span><span class=m>1</span><span class=nb>^</span><span class=nv>\infty</span><span class=s>$</span>
+</span></span></code></pre></td></tr></table></div></div><p>效果如: $\int_1^\infty$</p><ul><li>\iint表示求积分, 下标表示求和下限, 上标表示求和上限</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl><span class=s>$</span><span class=nv>\iint</span><span class=nb>_</span><span class=m>1</span><span class=nb>^</span><span class=nv>\infty</span><span class=s>$</span>
+</span></span></code></pre></td></tr></table></div></div><p>效果如: $\iint_1^\infty$</p><ul><li>类似标签</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl><span class=s>$</span><span class=nv>\prod</span><span class=nb>_</span><span class=m>1</span><span class=nb>^n</span><span class=s>$</span> == ∏
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s>$</span><span class=nv>\bigcup</span><span class=s>$</span> == ⋃
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s>$</span><span class=nv>\bigcap</span><span class=s>$</span> == ⋂
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s>$</span><span class=nv>\iint</span><span class=s>$</span> == ∬
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s>$</span><span class=nv>\approx</span><span class=s>$</span> == ≈
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s>$</span><span class=nv>\times</span><span class=s>$</span> == ×
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s>$</span><span class=nv>\partial</span><span class=s>$</span> == ∂
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s>$</span><span class=nv>\vec</span><span class=nb>{a}</span><span class=s>$</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s>$</span><span class=m>1</span><span class=nb> </span><span class=nv>\choose</span><span class=nb> n</span><span class=s>$</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s>$</span><span class=nv>\hat</span><span class=nb>{y}</span><span class=s>$</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s>$</span><span class=nv>\overline</span><span class=nb>{y}</span><span class=s>$</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s>$</span><span class=nv>\underline</span><span class=nb>{abc}</span><span class=s>$</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=sb>$$</span><span class=nb>
+</span></span></span><span class=line><span class=cl><span class=nb></span><span class=nv>\begin</span><span class=nb>{bmatrix}
+</span></span></span><span class=line><span class=cl><span class=nb></span><span class=m>1</span><span class=nb> &amp; </span><span class=m>2</span><span class=nb> &amp; </span><span class=m>3</span><span class=nb> </span><span class=nv>\\</span><span class=nb>
+</span></span></span><span class=line><span class=cl><span class=nb></span><span class=m>4</span><span class=nb> &amp; </span><span class=m>5</span><span class=nb> &amp; </span><span class=m>6</span><span class=nb> </span><span class=nv>\\</span><span class=nb>
+</span></span></span><span class=line><span class=cl><span class=nb></span><span class=nv>\vdots</span><span class=nb> &amp; </span><span class=nv>\vdots</span><span class=nb> &amp; </span><span class=nv>\vdots</span><span class=nb> </span><span class=nv>\\</span><span class=nb>
+</span></span></span><span class=line><span class=cl><span class=nb></span><span class=nv>\end</span><span class=nb>{bmatrix}
+</span></span></span><span class=line><span class=cl><span class=nb></span><span class=s>$$</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=sb>$$</span><span class=nb>
+</span></span></span><span class=line><span class=cl><span class=nb>f</span><span class=o>(</span><span class=nb>x</span><span class=o>)</span><span class=nb> </span><span class=o>=</span><span class=nb> 
+</span></span></span><span class=line><span class=cl><span class=nb></span><span class=nv>\begin</span><span class=nb>{cases}
+</span></span></span><span class=line><span class=cl><span class=nb>x </span><span class=o>+</span><span class=nb> </span><span class=m>1</span><span class=nb> &amp; x </span><span class=nv>\gt</span><span class=nb> </span><span class=m>1</span><span class=nb> </span><span class=nv>\\</span><span class=nb>
+</span></span></span><span class=line><span class=cl><span class=nb></span><span class=m>2</span><span class=nb>x &amp; others
+</span></span></span><span class=line><span class=cl><span class=nb></span><span class=nv>\end</span><span class=nb>{cases}
+</span></span></span><span class=line><span class=cl><span class=nb></span><span class=s>$$</span>
+</span></span></code></pre></td></tr></table></div></div><p>效果如:
+$\prod_1^n$</p><p>$\bigcup$</p><p>$\bigcap$</p><p>$\iint$</p><p>$\approx$</p><p>$\times$</p><p>$\partial$</p><p>$\vec{a}$</p><p>$1 \choose n$</p><p>$\hat{y}$</p><p>$\overline{y}$</p><p>$\underline{abc}$</p><p>$$
+\begin{bmatrix}
+1 & 2 & 3 \
+4 & 5 & 6 \
+\vdots & \vdots & \vdots \
+\end{bmatrix}
+$$</p><p>$$
+f(x) =
+\begin{cases}
+x + 1 & x \gt 1 \
+2x & others
+\end{cases}
+$$</p><h4 id=分式根式>分式/根式</h4><p>分式两种方式:</p><ul><li>使用$\frac ab$, 结果为$\frac ab$. 如果分子分母不是单个字符需要用{}</li><li>使用\over来分隔, ${a+1\over b+1}$ == ${a+1\over b+1}$</li></ul><p>根式用\$\sqrt[a]b\$表示:
+其中，方括号内的值用来表示开几次方，省略方括号则表示开方, 如:
+例一: \$\sqrt[4]{\frac xy}\$ == $\sqrt[4]{\frac xy}$
+例二: \$\sqrt{x^3}\$ == $\sqrt{x^3}$</p><h3 id=插入代码块>插入代码块</h3><ul><li>行内代码, 单组反引号</li><li>代码块, 两个以上反引号包裹
+这是一段<code>var x=3</code>行内代码
+以下是代码块</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=nx>fun</span><span class=p>(</span><span class=nx>x</span><span class=o>:</span> <span class=nx>Int</span><span class=p>,</span> <span class=nx>y</span><span class=o>:</span><span class=nx>Int</span><span class=p>)</span><span class=o>:</span> <span class=nx>Int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>x</span> <span class=o>+</span> <span class=nx>y</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=插入表格>插入表格</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>表头|条目一|条目二
+</span></span><span class=line><span class=cl>:---:|:---:|:---:
+</span></span><span class=line><span class=cl>项目|项目一|项目二
+</span></span></code></pre></td></tr></table></div></div><p>以上标记显示效果如下:</p><table><thead><tr><th style=text-align:center>表头</th><th style=text-align:center>条目一</th><th style=text-align:center>条目二</th></tr></thead><tbody><tr><td style=text-align:center>项目</td><td style=text-align:center>项目一</td><td style=text-align:center>项目二</td></tr></tbody></table><h3 id=流程图>流程图</h3><p>详见 <a href=https://mermaidjs.github.io/ target=_blank rel="noopener noreffer">https://mermaidjs.github.io/</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>...mermaid ...请替换成反引号
+</span></span><span class=line><span class=cl>graph TD
+</span></span><span class=line><span class=cl>client1--&gt;|read / write|SVN((SVN server))
+</span></span><span class=line><span class=cl>client2--&gt;|read only|SVN
+</span></span><span class=line><span class=cl>client3--&gt;|read / write|SVN
+</span></span><span class=line><span class=cl>client4--&gt;|read only|SVN
+</span></span><span class=line><span class=cl>client5(...)--&gt;SVN
+</span></span><span class=line><span class=cl>SVN---|store the data|sharedrive
+</span></span><span class=line><span class=cl>...
+</span></span></code></pre></td></tr></table></div></div><p>效果如下</p><div class=mermaid id=id-1></div><h3 id=甘特图>甘特图</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>...mermaid 将...替换成反引号
+</span></span><span class=line><span class=cl>gantt
+</span></span><span class=line><span class=cl>        dateFormat  YYYY-MM-DD
+</span></span><span class=line><span class=cl>        title Adding GANTT diagram functionality to mermaid
+</span></span><span class=line><span class=cl>        section A section
+</span></span><span class=line><span class=cl>        Completed task            :done,    des1, 2014-01-06,2014-01-08
+</span></span><span class=line><span class=cl>        Active task               :active,  des2, 2014-01-09, 3d
+</span></span><span class=line><span class=cl>        Future task               :         des3, after des2, 5d
+</span></span><span class=line><span class=cl>        Future task2               :         des4, after des3, 5d
+</span></span><span class=line><span class=cl>        section Critical tasks
+</span></span><span class=line><span class=cl>        Completed task in the critical line :crit, done, 2014-01-06,24h
+</span></span><span class=line><span class=cl>        Implement parser and jison          :crit, done, after des1, 2d
+</span></span><span class=line><span class=cl>        Create tests for parser             :crit, active, 3d
+</span></span><span class=line><span class=cl>        Future task in critical line        :crit, 5d
+</span></span><span class=line><span class=cl>        Create tests for renderer           :2d
+</span></span><span class=line><span class=cl>        Add to mermaid                      :1d
+</span></span><span class=line><span class=cl>...
+</span></span></code></pre></td></tr></table></div></div><p>效果如下</p><div class=mermaid id=id-2></div><h3 id=uml序列图>UML序列图</h3><p>语法参考：<a href=https://bramp.github.io/js-sequence-diagrams/ target=_blank rel="noopener noreffer">https://bramp.github.io/js-sequence-diagrams/</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>sequenceDiagram
+</span></span><span class=line><span class=cl>    participant Alice
+</span></span><span class=line><span class=cl>    participant Bob
+</span></span><span class=line><span class=cl>    Alice-&gt;John: Hello John, how are you?
+</span></span><span class=line><span class=cl>    loop Healthcheck
+</span></span><span class=line><span class=cl>        John-&gt;John: Fight against hypochondria
+</span></span><span class=line><span class=cl>    end
+</span></span><span class=line><span class=cl>    Note right of John: Rational thoughts &lt;br/&gt;prevail...
+</span></span><span class=line><span class=cl>    John--&gt;Alice: Great!
+</span></span><span class=line><span class=cl>    John-&gt;Bob: How about you?
+</span></span><span class=line><span class=cl>    Bob--&gt;John: Jolly good!
+</span></span></code></pre></td></tr></table></div></div><p>效果如下</p><div class=mermaid id=id-3></div><h2 id=其它>其它</h2><h3 id=特殊符号处理>特殊符号处理</h3><p>\反斜杠插入用到的特殊符号,主要用到以下几种特殊符号</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>\   反斜线
+</span></span><span class=line><span class=cl>`   反引号
+</span></span><span class=line><span class=cl><span class=k>*</span>   星号
+</span></span><span class=line><span class=cl>_   底线
+</span></span><span class=line><span class=cl>{}  花括号
+</span></span><span class=line><span class=cl>[]  方括号
+</span></span><span class=line><span class=cl>()  括弧
+</span></span><span class=line><span class=cl><span class=gh>#   井字号
+</span></span></span><span class=line><span class=cl><span class=gh></span>+   加号
+</span></span><span class=line><span class=cl><span class=k>-</span>   减号
+</span></span><span class=line><span class=cl>.   英文句点
+</span></span><span class=line><span class=cl>!   惊叹号
+</span></span></code></pre></td></tr></table></div></div><h3 id=给文字上色>给文字上色</h3><p>使用html方式给文字上色</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>font</span> <span class=na>color</span><span class=o>=</span><span class=s>&#39;#ff0000&#39;</span><span class=p>&gt;</span>测试红色<span class=p>&lt;/</span><span class=nt>font</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>效果如下
+<font color=#ff0000>测试红色</font></p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2022-09-22&nbsp;<a class=git-hash href=Vincent--Li/Vincent--Li.github.io/commit/4ec7dd30e9fdf8d8f3faaa111d039fbd19c68dba target=_blank title="commit by Vincent--Li(q315744068@gmail.com) 4ec7dd30e9fdf8d8f3faaa111d039fbd19c68dba: update: new posts">
+<i class="fas fa-hashtag fa-fw" aria-hidden=true></i>4ec7dd3</a></span></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=/2022/9/17/markdown%E5%A4%8D%E4%B9%A0/index.md target=_blank>Read Markdown</a></span></div><div class=post-info-share><span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://vincent--li.github.io/2022/9/17/markdown%E5%A4%8D%E4%B9%A0/ data-title=Markdown复习><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Facebook" data-sharer=facebook data-url=https://vincent--li.github.io/2022/9/17/markdown%E5%A4%8D%E4%B9%A0/><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Hacker News" data-sharer=hackernews data-url=https://vincent--li.github.io/2022/9/17/markdown%E5%A4%8D%E4%B9%A0/ data-title=Markdown复习><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Line" data-sharer=line data-url=https://vincent--li.github.io/2022/9/17/markdown%E5%A4%8D%E4%B9%A0/ data-title=Markdown复习><i data-svg-src=/lib/simple-icons/icons/line.min.svg aria-hidden=true></i></a><a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://vincent--li.github.io/2022/9/17/markdown%E5%A4%8D%E4%B9%A0/ data-title=Markdown复习><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/2019/8/1/java-class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/ class=prev rel=prev title="Java Class文件结构"><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>Java Class文件结构</a>
+<a href=/2022/9/21/csapp-preface/ class=next rel=next title="CS:APP Preface">CS:APP Preface<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div><div id=comments></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2019 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/about target=_blank>Vincent</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/contrib/auto-render.min.js></script><script type=text/javascript src=/lib/katex/contrib/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/contrib/mhchem.min.js></script><script type=text/javascript src=/lib/mermaid/mermaid.min.js></script><script type=text/javascript src=/lib/cookieconsent/cookieconsent.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:50},comment:{},cookieconsent:{content:{dismiss:"Got it!",link:"Learn more",message:"This website uses Cookies to improve your experience."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},data:{"id-1":`graph TD;
+  client1--\u003e|read / write|SVN((SVN server));
+  client2--\u003e|read only|SVN;
+  client3--\u003e|read / write|SVN;
+  client4--\u003e|read only|SVN;
+  client5(...)--\u003eSVN;
+  SVN---|store the data|sharedrive;`,"id-2":`gantt
+        dateFormat  YYYY-MM-DD
+        title Adding GANTT diagram functionality to mermaid
+        section A section
+        Completed task            :done,    des1, 2014-01-06,2014-01-08
+        Active task               :active,  des2, 2014-01-09, 3d
+        Future task               :         des3, after des2, 5d
+        Future task2               :         des4, after des3, 5d
+        section Critical tasks
+        Completed task in the critical line :crit, done, 2014-01-06,24h
+        Implement parser and jison          :crit, done, after des1, 2d
+        Create tests for parser             :crit, active, 3d
+        Future task in critical line        :crit, 5d
+        Create tests for renderer           :2d
+        Add to mermaid                      :1d`,"id-3":`sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice-\u003eJohn: Hello John, how are you?
+    loop Healthcheck
+        John-\u003eJohn: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts \u003cbr/\u003eprevail...
+    John--\u003eAlice: Great!
+    John-\u003eBob: How about you?
+    Bob--\u003eJohn: Jolly good!`},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!0,left:"\\begin{equation}",right:"\\end{equation}"},{display:!0,left:"\\begin{equation*}",right:"\\end{equation*}"},{display:!0,left:"\\begin{align}",right:"\\end{align}"},{display:!0,left:"\\begin{align*}",right:"\\end{align*}"},{display:!0,left:"\\begin{alignat}",right:"\\end{alignat}"},{display:!0,left:"\\begin{alignat*}",right:"\\end{alignat*}"},{display:!0,left:"\\begin{gather}",right:"\\end{gather}"},{display:!0,left:"\\begin{CD}",right:"\\end{CD}"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/index.json",maxResultLength:10,noResultsFound:"No results found",snippetLength:30,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>
