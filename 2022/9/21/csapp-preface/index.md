@@ -1,12 +1,13 @@
-# CS:APP Preface
+# CSAPP: Preface
 
 
-# Book Overview
->***C1: A Tour of Computer Systems***
+## A Tour of Computer Systems
 
-[A Tour of Computer Systems]({{<ref "introduction.md">}})
+>[***C1: A Tour of Computer Systems***]({{<ref "introduction.md">}})
 
->***C2: Representing and Manipulating Information***
+## Part I: Program Structure and Execution 
+
+>[***C2: Representing and Manipulating Information***]({{<ref "rami.md">}})
 
 >***C3: Machine-Level Representation of Programs***
 
@@ -16,11 +17,15 @@
 
 >***C6: The Memory Hierarchy***
 
+## Part II: Running Prgrams on a System
+
 >***C7: Linking***
 
 >***C8: Exceptional Control Flow***
 
 >***C9: Virtual Memory***
+
+## Part III: Interaction and Communication between Programs
 
 >***C10: System-Level I/O***
 

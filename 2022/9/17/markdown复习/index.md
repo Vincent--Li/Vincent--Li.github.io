@@ -38,12 +38,14 @@ Markdown支持6中级别的标题, 对应HTML标签h1-h6
 
 ```markdown
 [点击跳转至百度](http://www.baidu.com)
-![图片](https://upload.jianshu.io/users/upload_avatars/2130822/3507378e03a8.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120)
+![图片](https://vincent--li.github.io/favicon.ico)
 自动生成连接 <https://www.baidu.com>
 ```
 
 [点击跳转至百度](http://www.baidu.com)
-![图片](https://upload.jianshu.io/users/upload_avatars/2130822/3507378e03a8.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120)
+
+![图片](https://vincent--li.github.io/favicon.ico)
+
 自动生成连接 <https://www.baidu.com>
 
 注: 引用图片和链接的唯一区别就是最前面的叹号
