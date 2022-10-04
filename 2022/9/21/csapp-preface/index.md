@@ -9,7 +9,7 @@
 
 >[***C2: Representing and Manipulating Information***]({{<ref "rami.md">}})
 
->***C3: Machine-Level Representation of Programs***
+>[***C3: Machine-Level Representation of Programs***]({{<ref "mlrp.md">}})
 
 >***C4: Processor Architecture***
 
