@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>操作系统 on</title><link>/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link><description>Recent content in 操作系统 on</description><generator>Hugo</generator><language>en</language><lastBuildDate>Fri, 30 Sep 2022 20:41:22 +0800</lastBuildDate><atom:link href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml"/><item><title>CSAPP: Machine-Level Representation of Programs</title><link>/posts/csapp/mlrp/</link><pubDate>Fri, 30 Sep 2022 20:41:22 +0800</pubDate><guid>/posts/csapp/mlrp/</guid><description>3.2 程序编码 # long mult2(long, long); void multstore(long x, long y, long *dest) { long t = mult2(x, y); *dest = t; } # 生成汇编代码 -&amp;gt; .s gcc -Og -S mstore.c # 生成目标代码 -&amp;gt; .o gcc -Og -c mstore.c # 查看机器码内容 objdump -d mstore.o 3.3 数据格式 # 3.4 访问信息 # 一个 x86_64 CPU 包含一组16个村粗64位值的通用目的寄存器. 这些寄存器用来存储整数数据和指针
+字节级操作可以访问最低的字节 16位操作可以访问最低的2个字节 32位操作可以访问最低的4个字节 64位操作可以访问整个寄存器
+最特别的: 栈指针 %rsp, 用来指明运行时栈的结束位置
+3.4.1 操作数指示符 # 不同的操作数的可能性被分为三种类型:
+立即数(immediate): 表示常数值, 书写方式是&amp;rsquo;$&amp;rsquo; 后面跟一个用标准C表示法表示的整数.</description></item><item><title>CSAPP: Representing and Manipulating Information</title><link>/posts/csapp/rami/</link><pubDate>Mon, 26 Sep 2022 22:35:55 +0800</pubDate><guid>/posts/csapp/rami/</guid><description>TO be continue
+2.1 Information Storage #</description></item><item><title>CSAPP: A Tour of Computer Systems</title><link>/posts/csapp/introduction/</link><pubDate>Thu, 22 Sep 2022 00:10:37 +0800</pubDate><guid>/posts/csapp/introduction/</guid><description>1.1 Information is Bits + Contexts # The same bits may have different meaning under different contexts
+// hello.c #include &amp;lt;stdio.h&amp;gt; int main() { printf(&amp;#34;hello, world\n&amp;#34;); return 0; } 1.2 Programs Are Traslated by Other Programs into Different Forms # The programs that perform four phases(preprocessor, compiler, assembler, and linker) are known colletively as the compilation system
+Preprocessing phase. The preprocessor(cpp) modifies the original C program according to directives that begin with the &amp;lsquo;#&amp;rsquo; character.</description></item><item><title>CSAPP: Preface</title><link>/posts/csapp/preface/</link><pubDate>Wed, 21 Sep 2022 22:41:47 +0800</pubDate><guid>/posts/csapp/preface/</guid><description>A Tour of Computer Systems # C1: A Tour of Computer Systems
+Part I: Program Structure and Execution # C2: Representing and Manipulating Information
+C3: Machine-Level Representation of Programs
+C4: Processor Architecture
+C5: Optimizing Program Performance
+C6: The Memory Hierarchy
+Part II: Running Prgrams on a System # C7: Linking
+C8: Exceptional Control Flow
+C9: Virtual Memory
+Part III: Interaction and Communication between Programs # C10: System-Level I/O
+C11: Network Programming</description></item></channel></rss>

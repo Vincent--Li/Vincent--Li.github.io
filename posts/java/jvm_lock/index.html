@@ -1,0 +1,140 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="线程安全 # 多线程网站统计访问人数 # 使用锁, 维护计数器的串行访问与安全性 多线程方位ArrayList public static List<Integer> numberList = new ArrayList<Integer>(); public static class AddToList implements Runnable{ int startnum=0; public AddToList(int startnumber){ startnum=startnumber; } @Override public void run(){ int count=0; while(count<1000000){ numberList.add(startnum); startnum+=2; count++; } } } public static void main(String[] args) throws InterruptedException { Thread t1 = new Thread(new AddToList(0)); Thread t2 = new Thread(new AddToList(1)); t1.start(); t2.start(); while(t1.isAlive()||t2.isAlive()){ Thread.sleep(1); } System.out.println(numberList.size()); } 对象头Mark # Mark Word , 对象头的标记, 32位 描述对象的hash, 锁信息, 垃圾回收标记, 年龄 指向锁记录的指针 指向monitor的治身 GC标记 偏向锁线程ID 偏向锁 # 大部分情况是没有竞争的, 所以可以通过偏向来提高性能 所谓偏向, 就是偏心, 即锁会偏向于当前已经占有锁的线程 将对象头Mark标记设置为偏向, 并将线程ID写入对象头Mark 只要没有竞争, 获得偏向锁的线程,在将来进入同步块,不需要做同步 当其他线程请求相同的锁时, 偏向模式结束 -XX:+UseBiasedLocking 默认启用 在竞争激烈的场合, 偏向锁会增加系统负担 // -XX:+UseBiasedLocking -XX:BiasedLockingStartupDelay=0 public static List<Integer> numberList = new Vector<Integer>(); public static voi main(String[] args) throws InterruptedException { long begin = System."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="/posts/java/jvm_lock/"><meta property="og:title" content="JVM锁"><meta property="og:description" content="线程安全 # 多线程网站统计访问人数 # 使用锁, 维护计数器的串行访问与安全性 多线程方位ArrayList public static List<Integer> numberList = new ArrayList<Integer>(); public static class AddToList implements Runnable{ int startnum=0; public AddToList(int startnumber){ startnum=startnumber; } @Override public void run(){ int count=0; while(count<1000000){ numberList.add(startnum); startnum+=2; count++; } } } public static void main(String[] args) throws InterruptedException { Thread t1 = new Thread(new AddToList(0)); Thread t2 = new Thread(new AddToList(1)); t1.start(); t2.start(); while(t1.isAlive()||t2.isAlive()){ Thread.sleep(1); } System.out.println(numberList.size()); } 对象头Mark # Mark Word , 对象头的标记, 32位 描述对象的hash, 锁信息, 垃圾回收标记, 年龄 指向锁记录的指针 指向monitor的治身 GC标记 偏向锁线程ID 偏向锁 # 大部分情况是没有竞争的, 所以可以通过偏向来提高性能 所谓偏向, 就是偏心, 即锁会偏向于当前已经占有锁的线程 将对象头Mark标记设置为偏向, 并将线程ID写入对象头Mark 只要没有竞争, 获得偏向锁的线程,在将来进入同步块,不需要做同步 当其他线程请求相同的锁时, 偏向模式结束 -XX:+UseBiasedLocking 默认启用 在竞争激烈的场合, 偏向锁会增加系统负担 // -XX:+UseBiasedLocking -XX:BiasedLockingStartupDelay=0 public static List<Integer> numberList = new Vector<Integer>(); public static voi main(String[] args) throws InterruptedException { long begin = System."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2019-07-20T21:26:30+00:00"><meta property="article:modified_time" content="2019-07-20T21:26:30+00:00"><meta property="article:tag" content="JVM"><meta property="article:tag" content="Java"><title>JVM锁 | </title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=/posts/java/jvm_lock/><link rel=stylesheet href=/book.min.309b7ed028807cdb68d8d61e26d609f48369c098dbf5e4d8c0dcf4cdf49feafc.css><script defer src=/fuse.min.js></script><script defer src=/en.search.min.8aa13e2f4b9fdd1fa1c269db82d4ba6bb2746e64391b4052adb11ab4309caef3.js></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
+</label><strong>JVM锁</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#线程安全>线程安全</a></li><li><a href=#对象头mark>对象头Mark</a></li><li><a href=#偏向锁>偏向锁</a></li><li><a href=#轻量级锁>轻量级锁</a></li><li><a href=#自旋锁>自旋锁</a></li><li><a href=#偏向锁轻量级锁自旋锁总结>偏向锁,轻量级锁,自旋锁总结</a></li><li><a href=#java语言层面优化>java语言层面优化</a></li><li><a href=#锁粗化>锁粗化</a></li><li><a href=#锁消除>锁消除</a></li><li><a href=#无锁>无锁</a></li></ul></li></ul></nav></aside></header><article class="markdown book-post"><h1><a href=/posts/java/jvm_lock/>JVM锁</a></h1><h5>July 20, 2019</h5><div><a href=/tags/jvm/>JVM</a>,
+<a href=/tags/java/>Java</a></div><h3 id=线程安全>线程安全
+<a class=anchor href=#%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8>#</a></h3><h4 id=多线程网站统计访问人数>多线程网站统计访问人数
+<a class=anchor href=#%e5%a4%9a%e7%ba%bf%e7%a8%8b%e7%bd%91%e7%ab%99%e7%bb%9f%e8%ae%a1%e8%ae%bf%e9%97%ae%e4%ba%ba%e6%95%b0>#</a></h4><ul><li>使用锁, 维护计数器的串行访问与安全性</li><li>多线程方位ArrayList</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> List<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span> numberList <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span>();
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AddToList</span> <span style=color:#66d9ef>implements</span> Runnable{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> startnum<span style=color:#f92672>=</span>0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>AddToList</span>(<span style=color:#66d9ef>int</span> startnumber){
+</span></span><span style=display:flex><span>        startnum<span style=color:#f92672>=</span>startnumber;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>(){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> count<span style=color:#f92672>=</span>0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span>(count<span style=color:#f92672>&lt;</span>1000000){
+</span></span><span style=display:flex><span>            numberList.<span style=color:#a6e22e>add</span>(startnum);
+</span></span><span style=display:flex><span>            startnum<span style=color:#f92672>+=</span>2;
+</span></span><span style=display:flex><span>            count<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>    Thread t1 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Thread(<span style=color:#66d9ef>new</span> AddToList(0));
+</span></span><span style=display:flex><span>    Thread t2 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Thread(<span style=color:#66d9ef>new</span> AddToList(1));
+</span></span><span style=display:flex><span>    t1.<span style=color:#a6e22e>start</span>();
+</span></span><span style=display:flex><span>    t2.<span style=color:#a6e22e>start</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span>(t1.<span style=color:#a6e22e>isAlive</span>()<span style=color:#f92672>||</span>t2.<span style=color:#a6e22e>isAlive</span>()){
+</span></span><span style=display:flex><span>        Thread.<span style=color:#a6e22e>sleep</span>(1);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(numberList.<span style=color:#a6e22e>size</span>());
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=对象头mark>对象头Mark
+<a class=anchor href=#%e5%af%b9%e8%b1%a1%e5%a4%b4mark>#</a></h3><ul><li>Mark Word , 对象头的标记, 32位</li><li>描述对象的hash, 锁信息, 垃圾回收标记, 年龄<ul><li>指向锁记录的指针</li><li>指向monitor的治身</li><li>GC标记</li><li>偏向锁线程ID</li></ul></li></ul><h3 id=偏向锁>偏向锁
+<a class=anchor href=#%e5%81%8f%e5%90%91%e9%94%81>#</a></h3><ul><li>大部分情况是没有竞争的, 所以可以通过偏向来提高性能</li><li>所谓偏向, 就是偏心, 即锁会偏向于当前已经占有锁的线程</li><li>将对象头Mark标记设置为偏向, 并将线程ID写入对象头Mark</li><li>只要没有竞争, 获得偏向锁的线程,在将来进入同步块,不需要做同步</li><li>当其他线程请求相同的锁时, 偏向模式结束</li><li>-XX:+UseBiasedLocking 默认启用</li><li>在竞争激烈的场合, 偏向锁会增加系统负担</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// -XX:+UseBiasedLocking -XX:BiasedLockingStartupDelay=0</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> List<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span> numberList <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Vector<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span>();
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> voi <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>long</span> begin <span style=color:#f92672>=</span> System.<span style=color:#a6e22e>currentTimeMills</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> count <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> startnum <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span>(count<span style=color:#f92672>&lt;</span> 10000000){
+</span></span><span style=display:flex><span>        numberLis.<span style=color:#a6e22e>add</span>(startnum);
+</span></span><span style=display:flex><span>        startnum<span style=color:#f92672>+=</span>2
+</span></span><span style=display:flex><span>        count<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>long</span> end <span style=color:#f92672>=</span> System.<span style=color:#a6e22e>currentTimeMillis</span>();
+</span></span><span style=display:flex><span>    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(end<span style=color:#f92672>-</span>begin);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=轻量级锁>轻量级锁
+<a class=anchor href=#%e8%bd%bb%e9%87%8f%e7%ba%a7%e9%94%81>#</a></h3><ul><li><p>BasicObjectLock</p></li><li><p>嵌在线程栈中的对象
+<script src=/mermaid.min.js></script><script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"default"})</script><p class=mermaid>graph LR
+A(BasicObjectLock)-->B(BasicLock)
+B-->C(markOop_displaced_header)
+A-->D(ptr to obj hold the lock)</p></p></li><li><p>普通锁的处理性能不够理想,轻量级锁是一种快速锁定的方法</p></li><li><p>如果对象没有被锁定</p></li></ul><ol><li>将对象头的Mark指针保存到锁对象</li><li>将对象头设置为指向锁的指针(在线程栈空间中)</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>lock<span style=color:#f92672>-&gt;</span>set_displaced_header(mark);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span>(mark<span style=color:#f92672>==</span> (markOop)Atomic::cmpxchg_ptr(lock,obj()<span style=color:#f92672>-&gt;</span>mark_addr(),mark)){
+</span></span><span style=display:flex><span>    TEVENT(slow_enter: release stacklock);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ul><li>如果轻量级锁失败,表示存在竞争,升级为重量级锁(常规锁)</li><li>在没有锁竞争的前提下,减少传统锁使用OS互斥产生的性能损耗</li><li>在竞争激烈时,轻量级锁会做很多额外操作,导致性能下降</li></ul><h3 id=自旋锁>自旋锁
+<a class=anchor href=#%e8%87%aa%e6%97%8b%e9%94%81>#</a></h3><ul><li>当竞争存在时, 如果香橙可以很快获得锁, 那么可以不在OS层挂起线程, 让线程做几个空操作(自旋)</li><li>JDK 1.6 中通过 -XX:+UseSpinning开启</li><li>JDK 1.7中去掉此参数, 内置默认开启</li><li>如果同步块很长,自旋失败,会降低系统性能</li><li>如果同步块很短,自旋成功, 节省线程挂起切换时间,提升系统性能</li></ul><h3 id=偏向锁轻量级锁自旋锁总结>偏向锁,轻量级锁,自旋锁总结
+<a class=anchor href=#%e5%81%8f%e5%90%91%e9%94%81%e8%bd%bb%e9%87%8f%e7%ba%a7%e9%94%81%e8%87%aa%e6%97%8b%e9%94%81%e6%80%bb%e7%bb%93>#</a></h3><ul><li>不是Java语言层面的锁优化方案</li><li>内置于JVM中的获取锁的优化方法和获取锁的步骤</li></ul><ol><li>偏向锁可用会现场时偏向锁</li><li>轻量级锁可用会先尝试轻量级锁</li><li>以上都失败,尝试自旋锁</li><li>再失败,尝试普通锁,使用OS互斥量操作系统层挂起</li></ol><h3 id=java语言层面优化>java语言层面优化
+<a class=anchor href=#java%e8%af%ad%e8%a8%80%e5%b1%82%e9%9d%a2%e4%bc%98%e5%8c%96>#</a></h3><h4 id=减少锁持有时间>减少锁持有时间
+<a class=anchor href=#%e5%87%8f%e5%b0%91%e9%94%81%e6%8c%81%e6%9c%89%e6%97%b6%e9%97%b4>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>//修改前</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>syncMethod</span>(){
+</span></span><span style=display:flex><span>    othercode1();
+</span></span><span style=display:flex><span>    mutextMethod();
+</span></span><span style=display:flex><span>    othercode2();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//修改后</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>syncMethod2</span>(){
+</span></span><span style=display:flex><span>    othercode1();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span>(<span style=color:#66d9ef>this</span>){
+</span></span><span style=display:flex><span>        mutextMethod();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    othercode2();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h4 id=减小锁粒度>减小锁粒度
+<a class=anchor href=#%e5%87%8f%e5%b0%8f%e9%94%81%e7%b2%92%e5%ba%a6>#</a></h4><ul><li>将大对象,拆成小对象,大大增加并行度,降低锁竞争</li><li>偏向锁, 轻量级锁成功率提高</li><li>ConcurrentHashMap</li><li>HashMap的同步实现</li></ul><ol><li>Collections.synchronizedMap(Map&lt;K,V> m)</li><li>返回SynchronizedMap对象</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> V <span style=color:#a6e22e>get</span>(Object key){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span>(mutext){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> m.<span style=color:#a6e22e>get</span>(key);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> V <span style=color:#a6e22e>pug</span>(K key, V value){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span>(mutext){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> m.<span style=color:#a6e22e>put</span>(key,value);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ul><li>ConcurrentHashMap</li></ul><ol><li>分成若干个Segment: Segment&lt;K,V> [] segments</li><li>Segment中维护HashEntry&lt;K,V></li><li>put操作时: 先定位到Segment, 锁定一个Segment, 执行put</li></ol><ul><li>在减小锁粒度后, ConcurrentHashMap允许若干个线程同时进入</li></ul><h4 id=锁分离>锁分离
+<a class=anchor href=#%e9%94%81%e5%88%86%e7%a6%bb>#</a></h4><ul><li>根据功能进行锁分离</li><li>ReadWriteLock</li><li>读多写少的情况,可以提高性能</li></ul><table><thead><tr><th>略</th><th>读锁</th><th>写锁</th></tr></thead><tbody><tr><td>读锁</td><td>可访问</td><td>不可访问</td></tr><tr><td>写锁</td><td>不可访问</td><td>不可访问</td></tr></tbody></table><ul><li>读写分离思想可以延伸, 只要操作互不影响,锁就可以分离</li><li>LinkedBlockingQueue</li></ul><ol><li>队列</li><li>链表</li></ol><h3 id=锁粗化>锁粗化
+<a class=anchor href=#%e9%94%81%e7%b2%97%e5%8c%96>#</a></h3><ul><li>通常情况下, 为了保证多线程间的有效并发,会要求每个线程持有锁的时间尽量短,即在使用完公共资源后,应该立即释放锁.只有这样,等待在这个锁上的其他线程才能尽早获得资源执行任务. 但是,凡事都有一个度,如果对同一个锁不停的进行请求,同步和释放, 其本身也会消耗系统宝贵资源,反而不利于性能的优化</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// 优化前</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>demoMethod</span>(){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span>(lock){
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//do sth.</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//做其他不需要的同步工作,但能很快执行完毕</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span>(lock){
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//do sth.</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//优化后</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>demoMethod</span>(){
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//整合成一次锁请求</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span>(lock){
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//do sth</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//do other</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=锁消除>锁消除
+<a class=anchor href=#%e9%94%81%e6%b6%88%e9%99%a4>#</a></h3><ul><li>在即时编译器时,如果发现不可能被共享的对象,则可以消除这些对象的锁操作</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// CIRCLE=2000000</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// -server -XX:+DoEscapeAnalysis -XX:+EliminateLocks 187ms</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// -server -XX:+DoEscapeAnalysis -XX:-EliminateLocks 254ms</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String args<span style=color:#f92672>[]</span>) <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>long</span> start <span style=color:#f92672>=</span> System.<span style=color:#a6e22e>currentTimeMillis</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0;i<span style=color:#f92672>&lt;</span>CIRCLE;i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        createStringBuffer(<span style=color:#e6db74>&#34;JVM&#34;</span>,<span style=color:#e6db74>&#34;Diagnosis&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>long</span> bufferCost <span style=color:#f92672>=</span> System.<span style=color:#a6e22e>currentTimeMillis</span>();
+</span></span><span style=display:flex><span>    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;createStringBuffer:&#34;</span> <span style=color:#f92672>+</span> bufferCost <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; ms&#34;</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> String <span style=color:#a6e22e>createStringBuffer</span>(String s1, String s2){
+</span></span><span style=display:flex><span>    StringBuffer sb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> StringBuffer();
+</span></span><span style=display:flex><span>    sb.<span style=color:#a6e22e>append</span>(s1); <span style=color:#75715e>// append 方法内置synchronize锁,但是这里是失效的</span>
+</span></span><span style=display:flex><span>    sb.<span style=color:#a6e22e>append</span>(s2);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> sb.<span style=color:#a6e22e>toString</span>();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=无锁>无锁
+<a class=anchor href=#%e6%97%a0%e9%94%81>#</a></h3><ul><li>锁是悲观的操作</li><li>无锁是乐观的操作</li><li>无锁的一种实现方式</li></ul><ol><li>CAS(Compare And Swap)</li><li>非阻塞的同步</li><li>CAS(Valve,Expect,NewValue)</li></ol><ul><li>在应用层面判断多线程的干扰,如果有干扰,则通知线程重试</li><li>java.util.concurrent.atomic.AtomicInteger</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getAndSet</span>(<span style=color:#66d9ef>int</span> <span style=color:#66d9ef>new</span> Value){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(;;){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> current <span style=color:#f92672>=</span> get();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(compareAndSet(current,newValue))
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> current;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#线程安全>线程安全</a></li><li><a href=#对象头mark>对象头Mark</a></li><li><a href=#偏向锁>偏向锁</a></li><li><a href=#轻量级锁>轻量级锁</a></li><li><a href=#自旋锁>自旋锁</a></li><li><a href=#偏向锁轻量级锁自旋锁总结>偏向锁,轻量级锁,自旋锁总结</a></li><li><a href=#java语言层面优化>java语言层面优化</a></li><li><a href=#锁粗化>锁粗化</a></li><li><a href=#锁消除>锁消除</a></li><li><a href=#无锁>无锁</a></li></ul></li></ul></nav></div></aside></main></body></html>
